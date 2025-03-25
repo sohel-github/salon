@@ -11,34 +11,49 @@
                         <h3 class="card-title">Edit Service</h3>
                     </div>
                     <!-- /.card-header -->
-                    <form action="{{ route('admin.services.update') }}" method="POST">
+                    <form action="{{ route('admin.services.update', $service->id) }}" method="POST">
                         <div class="card-body">
                             @csrf
                             @method('PUT')
                             <div class="mb-3">
                                 <label>Salon Name</label>
-                                <select class="form-select form-select-sm" name="salon_id" id="" required="">
+                                <select class="form-select form-select-sm @error('salon_id') is-invalid @enderror" name="salon_id" id="" required="">
                                     <option selected="" disabled="" value="">Choose...</option>
                                     @foreach($salons as $salon)
                                         <option value="{{ $salon->id }}" {{ $service->salon_id == $salon->id ? 'selected' : '' }}>{{ $salon->name }}</option>
                                     @endforeach
                                 </select>
+                                @error('salon_id')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="mb-3">
                                 <label>Service Name</label>
-                                <input type="text" name="name" class="form-control form-control-sm" value="{{ $service->name }}" required="">
+                                <input type="text" name="name" class="form-control form-control-sm @error('name') is-invalid @enderror" value="{{ $service->name }}" required="">
+                                @error('name')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="mb-3">
                                 <label>Description</label>
-                                <textarea name="description" class="form-control form-control-sm" required>{{ $service->description }}</textarea>
+                                <textarea name="description" class="form-control form-control-sm @error('description') is-invalid @enderror" required>{{ $service->description }}</textarea>
+                                @error('description')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="mb-3">
                                 <label>Price</label>
-                                <input type="text" name="price" class="form-control form-control-sm" value="{{ $service->price }}" required="">
+                                <input type="text" name="price" class="form-control form-control-sm @error('price') is-invalid @enderror" value="{{ $service->price }}" required="">
+                                @error('price')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="mb-3">
                                 <label>Duration</label>
-                                <input type="text" name="opening_hours" class="form-control form-control-sm" value="{{ $service->duration }}" required="">
+                                <input type="text" name="duration" class="form-control form-control-sm @error('duration') is-invalid @enderror" value="{{ $service->duration }}" required="">
+                                @error('duration')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
                             </div>
                         </div>
                         <!-- /.card-body -->

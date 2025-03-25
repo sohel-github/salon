@@ -40,6 +40,7 @@ class SalonController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request->all());
         $request->validate([
             'owner_id' => 'required|exists:users,id',
             'name' => 'required|string|max:255',

@@ -31,7 +31,8 @@ class AppointmentController extends Controller
     {
         $services = Service::all();
         $salons = Salon::all();
-        $users = User::all();
+        $users = User::where('role', 'customer')->get();
+
         return view('admin.appointments.create', compact('services', 'salons', 'users'));
     }
 
@@ -77,7 +78,7 @@ class AppointmentController extends Controller
     {
         $services = Service::all();
         $salons = Salon::all();
-        $users = User::all();
+        $users = User::where('role', 'customer')->get();
         return view('admin.appointments.edit', compact('appointment', 'services', 'salons', 'users'));
     }
 

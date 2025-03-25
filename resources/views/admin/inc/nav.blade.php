@@ -182,11 +182,13 @@
               <!--end::User Image-->
               <!--begin::Menu Footer-->
               <li class="user-footer">
-                <a href="{{ route('profile.index') }}" class="btn btn-default btn-flat">Profile</a>
-                <form method="POST" action="{{ route('logout') }}">
-                  @csrf
-                  <a href="{{ route('logout') }}" onclick="event.preventDefault(); this.closest('form').submit();" class="btn btn-default btn-flat float-end">Sign out</a>
-                </form>
+                <div style="display: flex;justify-content: space-between;align-items: center;">
+                  <a href="{{ route('profile.index') }}" class="btn btn-default btn-flat">Profile</a>
+                  <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <a href="{{ route('logout') }}" onclick="event.preventDefault(); this.closest('form').submit();" class="btn btn-default btn-flat float-end">Sign out</a>
+                  </form>
+                </div>
               </li>
               <!--end::Menu Footer-->
             </ul>
@@ -231,6 +233,7 @@
                 </a>
               </li>
 
+              @if(in_array(auth()->user()->role, ['admin', 'salon_owner']))
               <li class="nav-item">
                 <a href="#" class="nav-link">
                   <i class="nav-icon bi bi-box-seam-fill"></i>
@@ -248,7 +251,9 @@
                   </li>
                 </ul>
               </li>
+              @endif
 
+              @if(in_array(auth()->user()->role, ['admin', 'salon_owner']))
               <li class="nav-item">
                 <a href="#" class="nav-link">
                   <i class="nav-icon bi bi-box-seam-fill"></i>
@@ -266,7 +271,9 @@
                   </li>
                 </ul>
               </li>
+              @endif
 
+              @if(in_array(auth()->user()->role, ['admin', 'salon_owner', 'customer']))
               <li class="nav-item">
                 <a href="#" class="nav-link">
                   <i class="nav-icon bi bi-box-seam-fill"></i>
@@ -284,7 +291,9 @@
                   </li>
                 </ul>
               </li>
+              @endif
 
+              @if(in_array(auth()->user()->role, ['admin', 'salon_owner']))
               <li class="nav-item">
                 <a href="#" class="nav-link">
                   <i class="nav-icon bi bi-box-seam-fill"></i>
@@ -302,7 +311,9 @@
                   </li>
                 </ul>
               </li>
+              @endif
 
+              @if(in_array(auth()->user()->role, ['admin', 'customer']))
               <li class="nav-item">
                 <a href="#" class="nav-link">
                   <i class="nav-icon bi bi-box-seam-fill"></i>
@@ -320,7 +331,9 @@
                   </li>
                 </ul>
               </li>
+              @endif
 
+              @if(in_array(auth()->user()->role, ['admin', 'salon_owner']))
               <li class="nav-item">
                 <a href="#" class="nav-link">
                   <i class="nav-icon bi bi-box-seam-fill"></i>
@@ -338,7 +351,9 @@
                   </li>
                 </ul>
               </li>
+              @endif
               
+              @if(in_array(auth()->user()->role, ['admin', 'salon_owner']))
               <li class="nav-item">
                 <a href="#" class="nav-link">
                   <i class="nav-icon bi bi-box-seam-fill"></i>
@@ -356,7 +371,9 @@
                   </li>
                 </ul>
               </li>
+              @endif
 
+              @if(in_array(auth()->user()->role, ['admin', 'salon_owner']))
               <li class="nav-item">
                 <a href="#" class="nav-link">
                   <i class="nav-icon bi bi-box-seam-fill"></i>
@@ -374,7 +391,9 @@
                   </li>
                 </ul>
               </li>
+              @endif
 
+              @if(in_array(auth()->user()->role, ['admin', 'salon_owner']))
               <li class="nav-item">
                 <a href="#" class="nav-link">
                   <i class="nav-icon bi bi-box-seam-fill"></i>
@@ -392,6 +411,7 @@
                   </li>
                 </ul>
               </li>
+              @endif
 
               
             </ul>

@@ -35,13 +35,12 @@ Route::get('/', function () {
 
 Route::get('/admin/home', [HomeController::class, 'index'])->name('admin.home')->middleware(['auth']);
 
-Route::middleware(['auth'])->group(function () {
-    Route::get('/profile', [UserProfileController::class, 'index'])->name('profile.index');
-    Route::get('/profile/edit', [UserProfileController::class, 'edit'])->name('profile.edit');
-    Route::put('/profile/update', [UserProfileController::class, 'update'])->name('profile.update');
+Route::prefix('admin')->name('admin.')->middleware(['auth', 'role:customer'])->group(function () {
+    Route::resource('appointments', AppointmentController::class);
+    Route::resource('reviews', ReviewController::class);
 });
 
-Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () {
+Route::prefix('admin')->name('admin.')->middleware(['auth', 'role:admin,salon_owner'])->group(function () {
     Route::resource('salons', SalonController::class);
     Route::resource('services', ServiceController::class);
     Route::resource('appointments', AppointmentController::class);
@@ -51,7 +50,14 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () 
     Route::resource('categories', CategoryController::class);
     Route::resource('inventories', InventoryController::class);
     Route::resource('reports', ReportController::class);
+});
 
+
+
+Route::middleware(['auth', 'role:admin,salon_owner,customer'])->group(function () {
+    Route::get('/profile', [UserProfileController::class, 'index'])->name('profile.index');
+    Route::get('/profile/edit', [UserProfileController::class, 'edit'])->name('profile.edit');
+    Route::put('/profile/update', [UserProfileController::class, 'update'])->name('profile.update');
 });
 
 require __DIR__.'/auth.php';

@@ -36,6 +36,18 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::post('register', [AuthController::class, 'register']);
 Route::post('login', [AuthController::class, 'login']);
 
+// Route::middleware(['auth:sanctum', 'api_role:shop_owner'])->group(function () {
+//     Route::get('/shop/dashboard', function () {
+//         return response()->json(['message' => 'Shop Owner Dashboard']);
+//     });
+// });
+
+// Route::middleware(['auth:sanctum', 'api_role:customer'])->group(function () {
+//     Route::get('/customer/dashboard', function () {
+//         return response()->json(['message' => 'Customer Dashboard']);
+//     });
+// });
+
 Route::middleware('auth:sanctum')->group(function () {
 
     Route::get('profile', [AuthController::class, 'profile']);

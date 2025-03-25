@@ -40,7 +40,7 @@
                         </div>
                         <div>
                             <h4>Social Link</h4>
-                            <p><a href="{{ $profile->address }}" target="_blank">{{ $profile->social_link ?? '' }}</a></p>
+                            <p><a href="{{ $profile->social_link }}" target="_blank">{{ $profile->social_link ?? '' }}</a></p>
                         </div>
                         <div>
                             <h4>Phone</h4>
