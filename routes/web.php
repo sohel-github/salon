@@ -35,24 +35,17 @@ Route::get('/', function () {
 
 Route::get('/admin/home', [HomeController::class, 'index'])->name('admin.home')->middleware(['auth']);
 
-Route::prefix('admin')->name('admin.')->middleware(['auth', 'role:customer'])->group(function () {
-    Route::resource('appointments', AppointmentController::class);
-    Route::resource('reviews', ReviewController::class);
+Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () {
+    Route::resource('salons', SalonController::class)->middleware('role:admin,salon_owner');
+    Route::resource('services', ServiceController::class)->middleware('role:admin,salon_owner');
+    Route::resource('appointments', AppointmentController::class)->middleware('role:admin,salon_owner,customer');
+    Route::resource('payments', PaymentController::class)->middleware('role:admin,salon_owner');
+    Route::resource('reviews', ReviewController::class)->middleware('role:admin,salon_owner,customer');
+    Route::resource('products', ProductController::class)->middleware('role:admin,salon_owner');
+    Route::resource('categories', CategoryController::class)->middleware('role:admin,salon_owner');
+    Route::resource('inventories', InventoryController::class)->middleware('role:admin,salon_owner');
+    Route::resource('reports', ReportController::class)->middleware('role:admin,salon_owner');
 });
-
-Route::prefix('admin')->name('admin.')->middleware(['auth', 'role:admin,salon_owner'])->group(function () {
-    Route::resource('salons', SalonController::class);
-    Route::resource('services', ServiceController::class);
-    Route::resource('appointments', AppointmentController::class);
-    Route::resource('payments', PaymentController::class);
-    Route::resource('reviews', ReviewController::class);
-    Route::resource('products', ProductController::class);
-    Route::resource('categories', CategoryController::class);
-    Route::resource('inventories', InventoryController::class);
-    Route::resource('reports', ReportController::class);
-});
-
-
 
 Route::middleware(['auth', 'role:admin,salon_owner,customer'])->group(function () {
     Route::get('/profile', [UserProfileController::class, 'index'])->name('profile.index');
